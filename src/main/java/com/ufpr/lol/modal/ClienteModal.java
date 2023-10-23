@@ -3,6 +3,7 @@ package com.ufpr.lol.modal;
 import jakarta.persistence.*;
 
 @Entity
+
 public class ClienteModal {
 
     @Id
