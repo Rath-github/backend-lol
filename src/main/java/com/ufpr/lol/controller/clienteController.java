@@ -1,6 +1,7 @@
 package com.ufpr.lol.controller;
 
 import com.ufpr.lol.modal.ClienteModal;
+import com.ufpr.lol.service.clienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/clientes")
 public class clienteController {
     @Autowired
-    private ClienteService clienteService;
+    private clienteService clienteService;
 
     @PostMapping("/criar")
     public ResponseEntity<String> criarCliente(@RequestBody ClienteModal cliente) {
