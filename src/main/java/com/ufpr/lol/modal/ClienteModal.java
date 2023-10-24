@@ -18,4 +18,5 @@ public class ClienteModal {
     private String email;
     private String endereco;
     private String telefone;
+    private String senha;
 }
