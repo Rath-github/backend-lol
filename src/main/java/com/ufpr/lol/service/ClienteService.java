@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
+
 @Service
 public class ClienteService {
     private static final Logger logger = LoggerFactory.getLogger(ClienteService.class);
@@ -93,4 +95,61 @@ public class ClienteService {
 
         javaMailSender.send(mensagem);
     }
+
+    // Método para listar todos os clientes
+    public List<ClienteModal> listarClientes() {
+        try {
+            logger.info("Listando todos os clientes");
+            return clienteRepository.findAll();
+        } catch (Exception ex) {
+            logger.error("Erro ao listar clientes", ex);
+            throw new RuntimeException("Erro ao listar clientes", ex);
+        }
+    }
+
+    // Método para buscar detalhes de um cliente pelo ID
+    public ClienteModal buscarClientePorId(Long clienteId) {
+        try {
+            logger.info("Tentando buscar cliente por ID: {}", clienteId);
+            return clienteRepository.findById(clienteId)
+                    .orElseThrow(() -> new RuntimeException("Cliente não encontrado com ID: " + clienteId));
+        } catch (Exception ex) {
+            logger.error("Erro ao buscar cliente por ID", ex);
+            throw new RuntimeException("Erro ao buscar cliente por ID", ex);
+        }
+    }
+
+    // Método para editar um cliente
+    public void editarCliente(Long clienteId, ClienteModal cliente) {
+        try {
+            logger.info("Tentando editar cliente: ID {}", clienteId);
+            ClienteModal clienteExistente = clienteRepository.findById(clienteId)
+                    .orElseThrow(() -> new RuntimeException("Cliente não encontrado com ID: " + clienteId));
+            // Realize as alterações necessárias no clienteExistente com base nos dados do cliente recebido.
+            clienteExistente.setNome(cliente.getNome());
+            clienteExistente.setEmail(cliente.getEmail());
+            // ...
+            clienteRepository.save(clienteExistente);
+            logger.info("Cliente editado com sucesso: ID {}", clienteId);
+        } catch (Exception ex) {
+            logger.error("Erro ao editar cliente", ex);
+            throw new RuntimeException("Erro ao editar cliente", ex);
+        }
+    }
+
+    // Método para excluir um cliente pelo ID
+    public void excluirCliente(Long clienteId) {
+        try {
+            logger.info("Tentando excluir cliente: ID {}", clienteId);
+            ClienteModal cliente = clienteRepository.findById(clienteId)
+                    .orElseThrow(() -> new RuntimeException("Cliente não encontrado com ID: " + clienteId));
+            clienteRepository.delete(cliente);
+            logger.info("Cliente excluído com sucesso: ID {}", clienteId);
+        } catch (Exception ex) {
+            logger.error("Erro ao excluir cliente", ex);
+            throw new RuntimeException("Erro ao excluir cliente", ex);
+        }
+    }
+
+
 }
