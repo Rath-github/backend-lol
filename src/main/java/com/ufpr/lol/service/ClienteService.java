@@ -151,5 +151,14 @@ public class ClienteService {
         }
     }
 
+    public boolean autenticarUsuario(String email, String senhaDigitada) {
+        ClienteModal cliente = clienteRepository.findByEmail(email);
+
+        return cliente != null && senhaDigitada.equals(cliente.getSenha());
+    }
+
+
+
+
 
 }

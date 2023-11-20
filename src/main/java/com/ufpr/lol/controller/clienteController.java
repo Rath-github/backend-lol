@@ -2,15 +2,12 @@ package com.ufpr.lol.controller;
 
 import com.ufpr.lol.modal.ClienteModal;
 import com.ufpr.lol.service.ClienteService;
-import com.ufpr.lol.utils.SecureUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -25,11 +22,18 @@ public class clienteController {
         clienteService.criarCliente(cliente);
         return ResponseEntity.ok("Cliente criado com sucesso!");
     }
-        @GetMapping("/listar")
-        public ResponseEntity<List<ClienteModal>> listarClientes() {
+    @GetMapping("/listar")
+    public ResponseEntity<List<ClienteModal>> listarClientes(@RequestParam String email, @RequestParam String senha) {
+        boolean autenticado = clienteService.autenticarUsuario(email, senha);
+
+        if (autenticado) {
             List<ClienteModal> clientes = clienteService.listarClientes();
             return ResponseEntity.ok(clientes);
+        } else {
+            // Usuário não autenticado, retornar erro ou mensagem apropriada
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         }
+    }
 
         // Endpoint para buscar detalhes de um cliente pelo ID
         @GetMapping("listar/{Id}")
@@ -52,6 +56,5 @@ public class clienteController {
             return ResponseEntity.ok("Cliente excluído com sucesso!");
         }
 
-
-}
+    }
 

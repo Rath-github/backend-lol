@@ -24,6 +24,7 @@ public class SecureUtils {
         return generatedPassword;
     }
 
+
     public static byte[] getSalt() throws NoSuchAlgorithmException {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
