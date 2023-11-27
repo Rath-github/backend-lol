@@ -26,7 +26,7 @@ public class PedidoController {
         return ResponseEntity.ok(pedidos);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/todos/{id}")
     public ResponseEntity<PedidoModal> buscarPedidoPorId(@PathVariable Long id) {
         PedidoModal pedido = pedidoService.buscarPedidoPorId(id);
         if (pedido != null) {
@@ -36,7 +36,7 @@ public class PedidoController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/todos/{id}")
     public ResponseEntity<String> atualizarPedido(@PathVariable Long id, @RequestBody PedidoModal pedido) {
         PedidoModal pedidoExistente = pedidoService.buscarPedidoPorId(id);
         if (pedidoExistente != null) {
@@ -48,7 +48,7 @@ public class PedidoController {
         }
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/todos/{id}")
     public ResponseEntity<String> excluirPedido(@PathVariable Long id) {
         PedidoModal pedidoExistente = pedidoService.buscarPedidoPorId(id);
         if (pedidoExistente != null) {
