@@ -1,7 +1,10 @@
 package com.ufpr.lol.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.util.List;
 
 @Entity(name = "tb_clientes")
 @Data
@@ -28,4 +31,8 @@ public class ClienteModal {
 
     @Column(nullable = false) // Senha é obrigatória
     private String senha;
+
+    @OneToMany(mappedBy = "cliente")
+    @JsonIgnore // Ignora a serialização deste lado do relacionamento
+    private List<PedidoModal> pedidos;
 }

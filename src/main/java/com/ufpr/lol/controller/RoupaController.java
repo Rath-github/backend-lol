@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 
 @RestController
 @RequestMapping("/api/roupas")
@@ -29,7 +29,7 @@ public class RoupaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<RoupaModal>> buscarRoupaPorId(@PathVariable UUID id) {
+    public ResponseEntity<Optional<RoupaModal>> buscarRoupaPorId(@PathVariable long id) {
         Optional<RoupaModal> roupa = roupaService.buscarRoupaPorId(id);
         if (roupa != null) {
             return ResponseEntity.ok(roupa);
@@ -39,7 +39,7 @@ public class RoupaController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> atualizarRoupa(@PathVariable UUID id, @RequestBody RoupaModal roupa) {
+    public ResponseEntity<String> atualizarRoupa(@PathVariable long id, @RequestBody RoupaModal roupa) {
         Optional<RoupaModal> roupaExistente = roupaService.buscarRoupaPorId(id);
         if (roupaExistente != null) {
             roupa.setId(id);
@@ -51,7 +51,7 @@ public class RoupaController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> excluirRoupa(@PathVariable UUID id) {
+    public ResponseEntity<String> excluirRoupa(@PathVariable long id) {
         Optional<RoupaModal> roupaExistente = roupaService.buscarRoupaPorId(id);
         if (roupaExistente != null) {
             roupaService.excluirRoupa(id);

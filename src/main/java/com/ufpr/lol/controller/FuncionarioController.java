@@ -32,7 +32,7 @@ public class FuncionarioController {
 
     // Recuperação de um funcionário por ID
     @GetMapping("reco/{id}")
-    public ResponseEntity<FuncionarioModal> buscarFuncionarioPorId(@PathVariable UUID id) {
+    public ResponseEntity<FuncionarioModal> buscarFuncionarioPorId(@PathVariable long id) {
         FuncionarioModal funcionario = funcionarioService.buscarFuncionarioPorId(id);
         if (funcionario != null) {
             return ResponseEntity.ok(funcionario);
@@ -43,7 +43,7 @@ public class FuncionarioController {
 
     // Atualização de um funcionário
     @PutMapping("update/{id}")
-    public ResponseEntity<String> atualizarFuncionario(@PathVariable UUID id, @RequestBody FuncionarioModal funcionario) {
+    public ResponseEntity<String> atualizarFuncionario(@PathVariable long id, @RequestBody FuncionarioModal funcionario) {
         FuncionarioModal funcionarioExistente = funcionarioService.buscarFuncionarioPorId(id);
         if (funcionarioExistente != null) {
             funcionario.setId(id); // Garante que o ID não seja alterado
@@ -56,7 +56,7 @@ public class FuncionarioController {
 
     // Exclusão de um funcionário por ID
     @DeleteMapping("delete/{id}")
-    public ResponseEntity<String> excluirFuncionario(@PathVariable UUID id) {
+    public ResponseEntity<String> excluirFuncionario(@PathVariable long id) {
         FuncionarioModal funcionarioExistente = funcionarioService.buscarFuncionarioPorId(id);
         if (funcionarioExistente != null) {
             funcionarioService.excluirFuncionario(id);

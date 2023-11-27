@@ -18,11 +18,11 @@ public class RoupaService {
         return roupaRepository.save(roupa);
     }
 
-    public Optional<RoupaModal> buscarRoupaPorId(UUID id) {
+    public Optional<RoupaModal> buscarRoupaPorId(long id) {
         return roupaRepository.findById(id);
     }
 
-    public void excluirRoupa(UUID id) {
+    public void excluirRoupa(long id) {
         roupaRepository.deleteById(id);
     }
 

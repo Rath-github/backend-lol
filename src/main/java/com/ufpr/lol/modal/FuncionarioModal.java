@@ -5,14 +5,14 @@ import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
+
 
 @Entity(name = "tb_funcionarios")
 @Data
 public class FuncionarioModal {
     @Id
-    @GeneratedValue(generator = "uuid")
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @Column(unique = true)
     private String email;
     private String nome;

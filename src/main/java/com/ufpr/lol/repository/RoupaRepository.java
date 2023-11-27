@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Repository
 public interface RoupaRepository extends JpaRepository<RoupaModal, Long> {
-    Optional<RoupaModal> findById(UUID id);
+    Optional<RoupaModal> findById(long id);
 
-    void deleteById(UUID id);
+    void deleteById(long id);
 }

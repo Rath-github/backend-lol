@@ -11,7 +11,7 @@ import java.util.UUID;
 public interface FuncionarioRepository extends JpaRepository<FuncionarioModal, Long> {
     FuncionarioModal findByEmail(String email);
 
-    void deleteById(UUID id);
+    void deleteById(long id);
 
-    FuncionarioModal findById(UUID id);
+    FuncionarioModal findById(long id);
 }

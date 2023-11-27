@@ -1,12 +1,13 @@
 package com.ufpr.lol.modal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
-@Entity
+@Entity(name = "tb_pedidos")
 @Data
 public class PedidoModal {
     @Id
@@ -19,6 +20,7 @@ public class PedidoModal {
 
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonIgnore
     private ClienteModal cliente;
 
     @ManyToOne
@@ -26,6 +28,7 @@ public class PedidoModal {
     private FuncionarioModal funcionarioResponsavel;
 
     @OneToMany(mappedBy = "pedido")
+
     private List<ItemPedidoModal> itens;
 
 

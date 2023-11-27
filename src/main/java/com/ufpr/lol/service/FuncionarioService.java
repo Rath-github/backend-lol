@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @Service
 public class FuncionarioService {
@@ -28,11 +27,11 @@ public class FuncionarioService {
         return senha; // Este é um exemplo simples, substitua pela lógica real de criptografia.
     }
 
-    public FuncionarioModal buscarFuncionarioPorId(UUID id) {
+    public FuncionarioModal buscarFuncionarioPorId(long id) {
         return funcionarioRepository.findById(id);
     }
 
-    public void excluirFuncionario(UUID id) {
+    public void excluirFuncionario(long id) {
         funcionarioRepository.deleteById(id);
     }
 
